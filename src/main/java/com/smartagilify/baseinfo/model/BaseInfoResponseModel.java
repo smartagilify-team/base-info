@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class BaseInformationResponseModel {
+public class BaseInfoResponseModel {
     private Long id;
     private String title;
     private Long code;

@@ -7,7 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class BaseInformationRequestModel {
+public class BaseInfoRequestModel {
     private String title;
     private Long code;
     private String icon;
