@@ -1,5 +1,6 @@
-package com.smartagilify.baseinfo.model;
+package com.smartagilify.baseinfo.dtos;
 
+import com.smartagilify.core.model.BaseDTO;
 import lombok.*;
 
 @Getter
@@ -7,8 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class BaseInfoResponseModel {
-    private Long id;
+public class BaseInfoRequestDTO extends BaseDTO {
     private String title;
     private Long code;
     private String icon;
