@@ -1,7 +1,9 @@
 package com.smartagilify.baseinfo.controllers;
 
+import com.fasterxml.jackson.databind.ser.Serializers;
 import com.smartagilify.baseinfo.dtos.BaseInfoRequestDTO;
 import com.smartagilify.baseinfo.entities.BaseInfo;
+import com.smartagilify.baseinfo.entities.BaseInfoDetail;
 import com.smartagilify.baseinfo.mappers.BaseInfoMapper;
 import com.smartagilify.core.controllers.BaseController;
 import com.smartagilify.core.services.BaseService;

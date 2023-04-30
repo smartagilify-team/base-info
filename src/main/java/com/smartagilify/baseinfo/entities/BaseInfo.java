@@ -2,19 +2,26 @@ package com.smartagilify.baseinfo.entities;
 
 import com.smartagilify.core.entities.BaseEntity;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "tbl_base_information")
+@Table(name = "BI$T_BASE_INFO")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@SuperBuilder
 public class BaseInfo extends BaseEntity {
     private String title;
     private Long code;
     private String icon;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
