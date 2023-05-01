@@ -5,10 +5,9 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "BI$T_BASE_INFO_DETAIL")
@@ -17,14 +16,37 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @SuperBuilder
 public class BaseInfoDetail extends BaseEntity {
-    @ManyToOne
-    @JoinColumn(name = "base_info_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "base_info_id", referencedColumnName = "id")
     private BaseInfo baseInfo;
-    @ManyToOne
+
+    @Column(name = "title")
+    private String title;
+
+    @Column(name = "code")
+    private Long code;
+
+    @Column(name = "color")
+    private String color;
+
+    @Column(name = "icon")
+    private String icon;
+
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BaseInfoDetail> children = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
     private BaseInfoDetail parent;
-    private String title;
-    private Long code;
-    private String color;
-    private String icon;
+
+//    public void addChild(BaseInfoDetail child) {
+//        children.add(child);
+//        child.setParent(this);
+//    }
+//
+//    public void removeChild(BaseInfoDetail child) {
+//        children.remove(child);
+//        child.setParent(null);
+//    }
+
 }

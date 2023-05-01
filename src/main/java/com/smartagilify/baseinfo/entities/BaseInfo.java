@@ -12,16 +12,10 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @SuperBuilder
+
 public class BaseInfo extends BaseEntity {
     private String title;
     private Long code;
     private String icon;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }
