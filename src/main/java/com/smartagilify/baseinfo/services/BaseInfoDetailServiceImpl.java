@@ -64,4 +64,13 @@ public class BaseInfoDetailServiceImpl extends BaseService<BaseInfoDetail> imple
         List<BaseInfoDetailDTO> baseInfoDetailDTOS = Mappers.getMapper(BaseInfoDetailMapper.class).entity2Dto(rea);
         return baseInfoDetailDTOS;
     }
+
+    @Override
+    public List<BaseInfoDetailDTO> findAllChild(Long baseEntityInfoId) {
+
+        Optional<BaseInfoDetail> infoDetail = baseInfoDetailRepository.findById(baseEntityInfoId);
+        if (infoDetail.isPresent())
+            return mapper.entity2Dto(infoDetail.get().getChildren());
+        return null;
+    }
 }

@@ -3,6 +3,8 @@ package com.smartagilify.baseinfo.dtos;
 import com.smartagilify.core.model.BaseDTO;
 import lombok.*;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -10,6 +12,7 @@ import lombok.*;
 @Builder
 public class BaseInfoDTO extends BaseDTO {
     private String title;
-    private Long code;
+    private UUID code;
     private String icon;
+
 }

@@ -40,8 +40,14 @@ public class BaseInfoDetailController extends BaseController<BaseInfoDetailDTO, 
     }
 
     @GetMapping({"/find-all-by-base-info-id/{baseInfoId}"})
-    public ResponseEntity<ResultDTO<BaseInfoDetailDTO>> findAllByBaseInfoId (@PathVariable Long baseInfoId){
+    public ResponseEntity<ResultDTO<BaseInfoDetailDTO>> findAllByBaseInfoId(@PathVariable Long baseInfoId) {
         List<BaseInfoDetailDTO> all = baseInfoDetailService.findAllByBaseInfoId(baseInfoId);
         return new ResponseEntity(ResultDTO.<BaseInfoDetailDTO>builder().resultList(all).message("FIND ALL SUCCESSFULLY").build(), HttpStatus.OK);
+    }
+
+    @GetMapping({"/find-all-child/{baseInfoEntityId}"})
+    public ResponseEntity<ResultDTO<BaseInfoDetailDTO>> findAllChild(@PathVariable Long baseInfoEntityId) {
+        List<BaseInfoDetailDTO> allChild = baseInfoDetailService.findAllChild(baseInfoEntityId);
+        return new ResponseEntity(ResultDTO.<BaseInfoDetailDTO>builder().resultList(allChild).message("FIND ALL SUCCESSFULLY").build(), HttpStatus.OK);
     }
 }

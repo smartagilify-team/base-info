@@ -10,4 +10,6 @@ public interface BaseInfoDetailService {
     BaseInfoDetail save(InputDTO<BaseInfoDetailDTO> dto);
 
     List<BaseInfoDetailDTO> findAllByBaseInfoId(Long baseInfoId);
+
+    List<BaseInfoDetailDTO> findAllChild(Long baseEntityInfoId);
 }
