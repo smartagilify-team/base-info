@@ -1,9 +1,7 @@
 package com.smartagilify.baseinfo.controllers;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
-import com.smartagilify.baseinfo.dtos.BaseInfoRequestDTO;
+import com.smartagilify.baseinfo.dtos.BaseInfoDTO;
 import com.smartagilify.baseinfo.entities.BaseInfo;
-import com.smartagilify.baseinfo.entities.BaseInfoDetail;
 import com.smartagilify.baseinfo.mappers.BaseInfoMapper;
 import com.smartagilify.core.controllers.BaseController;
 import com.smartagilify.core.services.BaseService;
@@ -12,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/base-info")
-public class BaseInfoController extends BaseController<BaseInfoRequestDTO, BaseInfo, BaseInfoMapper> {
+public class BaseInfoController extends BaseController<BaseInfoDTO, BaseInfo, BaseInfoMapper> {
 
     public BaseInfoController(BaseService<BaseInfo> service) {
         super(service);
@@ -22,4 +20,5 @@ public class BaseInfoController extends BaseController<BaseInfoRequestDTO, BaseI
     protected Class<BaseInfoMapper> getMapper() {
         return BaseInfoMapper.class;
     }
+
 }

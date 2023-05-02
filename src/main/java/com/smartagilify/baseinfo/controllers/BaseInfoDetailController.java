@@ -1,11 +1,10 @@
 package com.smartagilify.baseinfo.controllers;
 
-import com.smartagilify.baseinfo.dtos.BaseInfoDetailRequestDTO;
+import com.smartagilify.baseinfo.dtos.BaseInfoDetailDTO;
 import com.smartagilify.baseinfo.entities.BaseInfoDetail;
 import com.smartagilify.baseinfo.mappers.BaseInfoDetailMapper;
 import com.smartagilify.baseinfo.services.BaseInfoDetailService;
 import com.smartagilify.core.controllers.BaseController;
-import com.smartagilify.core.model.BaseDTO;
 import com.smartagilify.core.model.InputDTO;
 import com.smartagilify.core.model.ResultDTO;
 import com.smartagilify.core.services.BaseService;
@@ -13,16 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.List;
 
 @Controller
 @RequestMapping("/api/base-info-detail")
-public class BaseInfoDetailController extends BaseController<BaseInfoDetailRequestDTO, BaseInfoDetail, BaseInfoDetailMapper> {
+public class BaseInfoDetailController extends BaseController<BaseInfoDetailDTO, BaseInfoDetail, BaseInfoDetailMapper> {
 
-    @Autowired
     private final BaseInfoDetailService baseInfoDetailService;
 
     public BaseInfoDetailController(BaseService<BaseInfoDetail> service, BaseInfoDetailService baseInfoDetailService) {
@@ -36,8 +34,14 @@ public class BaseInfoDetailController extends BaseController<BaseInfoDetailReque
     }
 
     @Override
-    public ResponseEntity<ResultDTO<BaseInfoDetailRequestDTO>> save(@RequestBody InputDTO<BaseInfoDetailRequestDTO> dto) {
+    public ResponseEntity<ResultDTO<BaseInfoDetailDTO>> save(@RequestBody InputDTO<BaseInfoDetailDTO> dto) {
         BaseInfoDetail save = baseInfoDetailService.save(dto);
-        return new ResponseEntity(ResultDTO.builder().resultList(Collections.singletonList((BaseDTO) this.mapper.entity2Dto(save))).message("CREATED").build(), HttpStatus.CREATED);
+        return new ResponseEntity(ResultDTO.<BaseInfoDetailDTO>builder().resultList(Collections.singletonList((BaseInfoDetailDTO) this.mapper.entity2Dto(save))).message("CREATED").build(), HttpStatus.CREATED);
+    }
+
+    @GetMapping({"/find-all-by-base-info-id/{baseInfoId}"})
+    public ResponseEntity<ResultDTO<BaseInfoDetailDTO>> findAllByBaseInfoId (@PathVariable Long baseInfoId){
+        List<BaseInfoDetailDTO> all = baseInfoDetailService.findAllByBaseInfoId(baseInfoId);
+        return new ResponseEntity(ResultDTO.<BaseInfoDetailDTO>builder().resultList(all).message("FIND ALL SUCCESSFULLY").build(), HttpStatus.OK);
     }
 }

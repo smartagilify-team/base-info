@@ -12,10 +12,12 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @SuperBuilder
-
 public class BaseInfo extends BaseEntity {
+    @Column(name = "title")
     private String title;
+    @Column(name = "code")
     private Long code;
+    @Column(name = "icon")
     private String icon;
 
 }

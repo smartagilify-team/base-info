@@ -10,5 +10,4 @@ public class BaseInfoServiceImpl extends BaseService<BaseInfo> implements BaseIn
     protected BaseInfoServiceImpl(JpaRepository<BaseInfo, Long> jpaRepository) {
         super(jpaRepository);
     }
-
 }
