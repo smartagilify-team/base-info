@@ -39,14 +39,4 @@ public class BaseInfoDetail extends BaseEntity {
     @JoinColumn(name = "parent_id")
     private BaseInfoDetail parent;
 
-//    public void addChild(BaseInfoDetail child) {
-//        children.add(child);
-//        child.setParent(this);
-//    }
-//
-//    public void removeChild(BaseInfoDetail child) {
-//        children.remove(child);
-//        child.setParent(null);
-//    }
-
 }

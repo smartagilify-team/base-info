@@ -8,12 +8,11 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class BaseInfoDetailDTO extends BaseDTO {
     private Long baseInfoId;
     private Long parentId;
     private String title;
-    private Long code;
+    private String code;
     private String color;
     private String icon;
 }

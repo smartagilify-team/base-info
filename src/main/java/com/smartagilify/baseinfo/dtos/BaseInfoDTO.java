@@ -9,10 +9,9 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class BaseInfoDTO extends BaseDTO {
     private String title;
-    private UUID code;
+    private String code;
     private String icon;
 
 }

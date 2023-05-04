@@ -17,15 +17,8 @@ import java.util.UUID;
 public class BaseInfo extends BaseEntity {
     @Column(name = "title")
     private String title;
-    @Column(nullable = false, unique = true, name = "code")
-    @Type(type = "org.hibernate.type.UUIDCharType")
-    private UUID code;
+    @Column(name = "code")
+    private String code;
     @Column(name = "icon")
     private String icon;
-
-    @PrePersist
-    public void generateCode() {
-        code = UUID.randomUUID();
-    }
-
 }
