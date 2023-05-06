@@ -6,5 +6,5 @@ import com.smartagilify.core.mappers.BaseMapper;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface BaseInfoMapper extends BaseMapper<BaseInfoDTO, BaseInfo> {
+public interface BaseInfoMapper extends BaseMapper<BaseInfo, BaseInfoDTO> {
 }

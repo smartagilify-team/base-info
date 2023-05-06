@@ -8,7 +8,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
-public interface BaseInfoDetailMapper extends BaseMapper<BaseInfoDetailDTO, BaseInfoDetail> {
+public interface BaseInfoDetailMapper extends BaseMapper<BaseInfoDetail, BaseInfoDetailDTO> {
     @Override
     @Mapping(source = "baseInfoId", target = "baseInfo.id")
     @Mapping(source = "parentId", target = "parent.id")

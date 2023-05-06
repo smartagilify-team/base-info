@@ -1,6 +1,7 @@
 package com.smartagilify.baseinfo.controllers;
 
 import com.smartagilify.baseinfo.dtos.BaseInfoDetailDTO;
+import com.smartagilify.baseinfo.entities.BaseInfo;
 import com.smartagilify.baseinfo.entities.BaseInfoDetail;
 import com.smartagilify.baseinfo.mappers.BaseInfoDetailMapper;
 import com.smartagilify.baseinfo.services.BaseInfoDetailService;
@@ -19,24 +20,19 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/api/base-info-detail")
-public class BaseInfoDetailController extends BaseController<BaseInfoDetailDTO, BaseInfoDetail, BaseInfoDetailMapper> {
+public class BaseInfoDetailController extends BaseController<BaseInfoDetail, BaseInfoDetailMapper, BaseInfoDetailDTO> {
 
     private final BaseInfoDetailService baseInfoDetailService;
 
-    public BaseInfoDetailController(BaseService<BaseInfoDetail> service, BaseInfoDetailService baseInfoDetailService) {
+    public BaseInfoDetailController(BaseService<BaseInfoDetail, BaseInfoDetailMapper, BaseInfoDetailDTO> service, BaseInfoDetailService baseInfoDetailService) {
         super(service);
         this.baseInfoDetailService = baseInfoDetailService;
     }
 
     @Override
-    protected Class<BaseInfoDetailMapper> getMapper() {
-        return BaseInfoDetailMapper.class;
-    }
-
-    @Override
     public ResponseEntity<ResultDTO<BaseInfoDetailDTO>> save(@RequestBody InputDTO<BaseInfoDetailDTO> dto) {
-        BaseInfoDetail save = baseInfoDetailService.save(dto);
-        return new ResponseEntity(ResultDTO.<BaseInfoDetailDTO>builder().resultList(Collections.singletonList((BaseInfoDetailDTO) this.mapper.entity2Dto(save))).message("CREATED").build(), HttpStatus.CREATED);
+        BaseInfoDetailDTO res = baseInfoDetailService.save(dto);
+        return new ResponseEntity(ResultDTO.<BaseInfoDetailDTO>builder().resultList(Collections.singletonList(res)).message("CREATED").build(), HttpStatus.CREATED);
     }
 
     @GetMapping({"/find-all-by-base-info-id/{baseInfoId}"})

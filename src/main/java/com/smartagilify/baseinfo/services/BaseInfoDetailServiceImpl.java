@@ -12,7 +12,6 @@ import com.smartagilify.core.model.InputDTO;
 import com.smartagilify.core.services.BaseService;
 import org.mapstruct.factory.Mappers;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -20,11 +19,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class BaseInfoDetailServiceImpl extends BaseService<BaseInfoDetail> implements BaseInfoDetailService {
+public class BaseInfoDetailServiceImpl extends BaseService<BaseInfoDetail, BaseInfoDetailMapper, BaseInfoDetailDTO> implements BaseInfoDetailService {
 
     private final BaseInfoDetailRepository baseInfoDetailRepository;
     private final BaseInfoRepository baseInfoRepository;
-    private final BaseInfoDetailMapper mapper = Mappers.getMapper(BaseInfoDetailMapper.class);
 
     public BaseInfoDetailServiceImpl(JpaRepository<BaseInfoDetail, Long> jpaRepository, BaseInfoDetailRepository baseInfoDetailRepository, BaseInfoRepository baseInfoRepository) {
         super(jpaRepository);
@@ -33,7 +31,12 @@ public class BaseInfoDetailServiceImpl extends BaseService<BaseInfoDetail> imple
     }
 
     @Override
-    public BaseInfoDetail save(InputDTO<BaseInfoDetailDTO> dto) {
+    protected Class<BaseInfoDetailMapper> getMapper() {
+        return BaseInfoDetailMapper.class;
+    }
+
+    @Override
+    public BaseInfoDetailDTO save(InputDTO<BaseInfoDetailDTO> dto) {
 
         BaseInfoDetail entity = mapper.dto2Entity(dto.getData());
         Optional<BaseInfo> baseInfoEntity = baseInfoRepository.findById(entity.getBaseInfo().getId());
@@ -55,7 +58,7 @@ public class BaseInfoDetailServiceImpl extends BaseService<BaseInfoDetail> imple
         entity.setCreateById(dto.getUserId());
         entity.setCreateDate(LocalDateTime.now());
         BaseInfoDetail save = baseInfoDetailRepository.save(entity);
-        return save;
+        return mapper.entity2Dto(save);
     }
 
     @Override
@@ -80,4 +83,5 @@ public class BaseInfoDetailServiceImpl extends BaseService<BaseInfoDetail> imple
         if (!baseInfoDetail.isPresent()) throw new BusinessException("cannot find base info with this code.");
         return mapper.entity2Dto(baseInfoDetail.get());
     }
+
 }

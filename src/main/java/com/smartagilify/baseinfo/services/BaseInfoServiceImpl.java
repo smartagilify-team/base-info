@@ -14,9 +14,13 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class BaseInfoServiceImpl extends BaseService<BaseInfo> implements BaseInfoService {
+public class BaseInfoServiceImpl extends BaseService<BaseInfo, BaseInfoMapper, BaseInfoDTO> implements BaseInfoService {
     private BaseInfoRepository baseInfoRepository;
-    private final BaseInfoMapper mapper = Mappers.getMapper(BaseInfoMapper.class);
+
+    @Override
+    protected Class getMapper() {
+        return BaseInfoMapper.class;
+    }
 
     protected BaseInfoServiceImpl(JpaRepository<BaseInfo, Long> jpaRepository, BaseInfoRepository baseInfoRepository) {
         super(jpaRepository);
@@ -27,6 +31,7 @@ public class BaseInfoServiceImpl extends BaseService<BaseInfo> implements BaseIn
     public BaseInfoDTO findByCode(String code) {
         Optional<BaseInfo> baseInfo = baseInfoRepository.findByCode(code);
         if (!baseInfo.isPresent()) throw new BusinessException("cannot find base info with this code.");
-        return mapper.entity2Dto(baseInfo.get());
+        return (BaseInfoDTO) mapper.entity2Dto(baseInfo.get());
     }
+
 }
