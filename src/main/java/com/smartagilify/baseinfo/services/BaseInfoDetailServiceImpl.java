@@ -73,4 +73,11 @@ public class BaseInfoDetailServiceImpl extends BaseService<BaseInfoDetail> imple
             return mapper.entity2Dto(infoDetail.get().getChildren());
         return null;
     }
+
+    @Override
+    public BaseInfoDetailDTO findByCode(String code) {
+        Optional<BaseInfoDetail> baseInfoDetail = baseInfoDetailRepository.findByCode(code);
+        if (!baseInfoDetail.isPresent()) throw new BusinessException("cannot find base info with this code.");
+        return mapper.entity2Dto(baseInfoDetail.get());
+    }
 }

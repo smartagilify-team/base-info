@@ -24,7 +24,7 @@ public class BaseInfoDetail extends BaseEntity {
     private String title;
 
     @Column(name = "code")
-    private Long code;
+    private String code;
 
     @Column(name = "color")
     private String color;

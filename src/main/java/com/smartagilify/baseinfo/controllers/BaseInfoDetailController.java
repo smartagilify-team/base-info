@@ -50,4 +50,10 @@ public class BaseInfoDetailController extends BaseController<BaseInfoDetailDTO, 
         List<BaseInfoDetailDTO> allChild = baseInfoDetailService.findAllChild(baseInfoEntityId);
         return new ResponseEntity(ResultDTO.<BaseInfoDetailDTO>builder().resultList(allChild).message("FIND ALL SUCCESSFULLY").build(), HttpStatus.OK);
     }
+
+    @GetMapping({"/find-by-code/{code}"})
+    public ResponseEntity<ResultDTO<BaseInfoDetailDTO>> findByCode(@PathVariable String code) {
+        BaseInfoDetailDTO res = baseInfoDetailService.findByCode(code);
+        return new ResponseEntity(ResultDTO.<BaseInfoDetailDTO>builder().resultList(Collections.singletonList(res)).message("FIND ALL SUCCESSFULLY").build(), HttpStatus.OK);
+    }
 }

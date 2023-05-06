@@ -12,4 +12,6 @@ public interface BaseInfoDetailService {
     List<BaseInfoDetailDTO> findAllByBaseInfoId(Long baseInfoId);
 
     List<BaseInfoDetailDTO> findAllChild(Long baseEntityInfoId);
+
+    BaseInfoDetailDTO findByCode(String code);
 }
