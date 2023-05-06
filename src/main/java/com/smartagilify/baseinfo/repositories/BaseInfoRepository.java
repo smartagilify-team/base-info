@@ -9,5 +9,5 @@ import java.util.Optional;
 
 @Repository
 public interface BaseInfoRepository extends JpaRepository<BaseInfo, Long> {
-    Optional<BaseInfoDTO> findByCode(String code);
+    Optional<BaseInfo> findByCode(String code);
 }
