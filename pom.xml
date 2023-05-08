@@ -52,7 +52,12 @@
         <dependency>
             <groupId>com.smartagilify</groupId>
             <artifactId>core</artifactId>
-            <version>1.0.0</version>
+            <version>1.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
     <dependencyManagement>
@@ -86,7 +91,7 @@
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
-                            <version>1.18.20</version>
+                            <version>1.18.26</version>
                         </path>
                         <path>
                             <groupId>org.projectlombok</groupId>
