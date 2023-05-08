@@ -19,7 +19,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Controller
-@RequestMapping("/api/base-info-detail")
+@RequestMapping(RestAddress.BASE_INFO_DETAIL)
 public class BaseInfoDetailController extends BaseController<BaseInfoDetail, BaseInfoDetailMapper, BaseInfoDetailDTO> {
 
     private final BaseInfoDetailService baseInfoDetailService;
@@ -35,19 +35,19 @@ public class BaseInfoDetailController extends BaseController<BaseInfoDetail, Bas
         return new ResponseEntity(ResultDTO.<BaseInfoDetailDTO>builder().resultList(Collections.singletonList(res)).message("CREATED").build(), HttpStatus.CREATED);
     }
 
-    @GetMapping({"/find-all-by-base-info-id/{baseInfoId}"})
+    @GetMapping({RestAddress.FIND_ALL_BY_BASE_INFO_ID})
     public ResponseEntity<ResultDTO<BaseInfoDetailDTO>> findAllByBaseInfoId(@PathVariable Long baseInfoId) {
         List<BaseInfoDetailDTO> all = baseInfoDetailService.findAllByBaseInfoId(baseInfoId);
         return new ResponseEntity(ResultDTO.<BaseInfoDetailDTO>builder().resultList(all).message("FIND ALL SUCCESSFULLY").build(), HttpStatus.OK);
     }
 
-    @GetMapping({"/find-all-child/{baseInfoEntityId}"})
+    @GetMapping(RestAddress.FIND_ALL_CHILD)
     public ResponseEntity<ResultDTO<BaseInfoDetailDTO>> findAllChild(@PathVariable Long baseInfoEntityId) {
         List<BaseInfoDetailDTO> allChild = baseInfoDetailService.findAllChild(baseInfoEntityId);
         return new ResponseEntity(ResultDTO.<BaseInfoDetailDTO>builder().resultList(allChild).message("FIND ALL SUCCESSFULLY").build(), HttpStatus.OK);
     }
 
-    @GetMapping({"/find-by-code/{code}"})
+    @GetMapping(RestAddress.FIND_BY_CODE)
     public ResponseEntity<ResultDTO<BaseInfoDetailDTO>> findByCode(@PathVariable String code) {
         BaseInfoDetailDTO res = baseInfoDetailService.findByCode(code);
         return new ResponseEntity(ResultDTO.<BaseInfoDetailDTO>builder().resultList(Collections.singletonList(res)).message("FIND ALL SUCCESSFULLY").build(), HttpStatus.OK);
