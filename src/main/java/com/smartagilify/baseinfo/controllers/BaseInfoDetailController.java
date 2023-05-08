@@ -1,7 +1,6 @@
 package com.smartagilify.baseinfo.controllers;
 
 import com.smartagilify.baseinfo.dtos.BaseInfoDetailDTO;
-import com.smartagilify.baseinfo.entities.BaseInfo;
 import com.smartagilify.baseinfo.entities.BaseInfoDetail;
 import com.smartagilify.baseinfo.mappers.BaseInfoDetailMapper;
 import com.smartagilify.baseinfo.services.BaseInfoDetailService;
@@ -9,11 +8,13 @@ import com.smartagilify.core.controllers.BaseController;
 import com.smartagilify.core.model.InputDTO;
 import com.smartagilify.core.model.ResultDTO;
 import com.smartagilify.core.services.BaseService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Collections;
 import java.util.List;
