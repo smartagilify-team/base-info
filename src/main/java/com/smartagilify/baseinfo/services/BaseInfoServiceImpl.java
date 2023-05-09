@@ -31,7 +31,7 @@ public class BaseInfoServiceImpl extends BaseService<BaseInfo, BaseInfoMapper, B
     public BaseInfoDTO findByCode(String code) {
         Optional<BaseInfo> baseInfo = baseInfoRepository.findByCode(code);
         if (!baseInfo.isPresent()) throw new BusinessException("cannot find base info with this code.");
-        return (BaseInfoDTO) mapper.entity2Dto(baseInfo.get());
+        return mapper.entity2Dto(baseInfo.get());
     }
 
 }
