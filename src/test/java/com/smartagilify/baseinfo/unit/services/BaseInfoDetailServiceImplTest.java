@@ -1,10 +1,11 @@
-package com.smartagilify.baseinfo.services;
+package com.smartagilify.baseinfo.unit.services;
 
 import com.smartagilify.baseinfo.dtos.BaseInfoDetailDTO;
 import com.smartagilify.baseinfo.entities.BaseInfo;
 import com.smartagilify.baseinfo.entities.BaseInfoDetail;
 import com.smartagilify.baseinfo.repositories.BaseInfoDetailRepository;
 import com.smartagilify.baseinfo.repositories.BaseInfoRepository;
+import com.smartagilify.baseinfo.services.BaseInfoDetailServiceImpl;
 import com.smartagilify.core.enumerations.EN_ACTION_TYPE;
 import com.smartagilify.core.exceptions.BusinessException;
 import com.smartagilify.core.model.InputDTO;
