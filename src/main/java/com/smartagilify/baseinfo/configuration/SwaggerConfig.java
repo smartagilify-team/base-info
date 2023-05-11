@@ -30,14 +30,14 @@ public class SwaggerConfig {
     @Bean
     public UiConfiguration uiConfig() {
         return UiConfigurationBuilder.builder()
-                .deepLinking(true)
+                .deepLinking(false)
                 .displayOperationId(false)
                 .defaultModelsExpandDepth(1)
                 .defaultModelExpandDepth(1)
                 .defaultModelRendering(ModelRendering.EXAMPLE)
                 .displayRequestDuration(false)
                 .docExpansion(DocExpansion.NONE)
-                .filter(false)
+                .filter(true)
                 .maxDisplayedTags(null)
                 .operationsSorter(OperationsSorter.ALPHA)
                 .showExtensions(false)

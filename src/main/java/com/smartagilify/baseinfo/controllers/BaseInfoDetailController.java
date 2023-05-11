@@ -8,10 +8,7 @@ import com.smartagilify.core.controllers.BaseController;
 import com.smartagilify.core.model.InputDTO;
 import com.smartagilify.core.model.ResultDTO;
 import com.smartagilify.core.services.BaseService;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -61,7 +58,8 @@ public class BaseInfoDetailController extends BaseController<BaseInfoDetail, Bas
     )
     @GetMapping({RestAddress.FIND_ALL_BY_BASE_INFO_ID})
     public ResponseEntity<ResultDTO<BaseInfoDetailDTO>> findAllByBaseInfoId(@PathVariable
-                                                                            @ApiParam(value = "Base info Id", required = true)
+                                                                            @ApiParam(value = "Base info Id", required = true
+                                                                            )
                                                                             Long baseInfoId) {
         List<BaseInfoDetailDTO> all = baseInfoDetailService.findAllByBaseInfoId(baseInfoId);
         return new ResponseEntity(ResultDTO.<BaseInfoDetailDTO>builder().resultList(all).message("FIND ALL SUCCESSFULLY").build(), HttpStatus.OK);
