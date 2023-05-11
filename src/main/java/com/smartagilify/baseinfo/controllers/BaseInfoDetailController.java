@@ -8,6 +8,7 @@ import com.smartagilify.core.controllers.BaseController;
 import com.smartagilify.core.model.InputDTO;
 import com.smartagilify.core.model.ResultDTO;
 import com.smartagilify.core.services.BaseService;
+import io.swagger.annotations.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -30,26 +31,68 @@ public class BaseInfoDetailController extends BaseController<BaseInfoDetail, Bas
         this.baseInfoDetailService = baseInfoDetailService;
     }
 
+    @ApiOperation(value = "Save a base info detail"
+            , notes = "This api will save base info detail")
+    @ApiResponses(
+            {
+                    @ApiResponse(code = 201, message = "successful"),
+                    @ApiResponse(code = 500, message = "internal error")
+            }
+    )
     @Override
-    public ResponseEntity<ResultDTO<BaseInfoDetailDTO>> save(@RequestBody InputDTO<BaseInfoDetailDTO> dto) {
+    public ResponseEntity<ResultDTO<BaseInfoDetailDTO>> save(@RequestBody
+                                                             @ApiParam(value = "Input dto included a base info detail data "
+                                                                     , required = true)
+                                                             InputDTO<BaseInfoDetailDTO> dto) {
         BaseInfoDetailDTO res = baseInfoDetailService.save(dto);
         return new ResponseEntity(ResultDTO.<BaseInfoDetailDTO>builder().resultList(Collections.singletonList(res)).message("CREATED").build(), HttpStatus.CREATED);
     }
 
+    @ApiOperation(value = "Find all base Info detail by their base info id"
+            , notes = "This api will return you all of base info detail that are belong to a base info just by base info id")
+    @ApiResponses(
+            {
+                    @ApiResponse(code = 200, message = "successful"),
+                    @ApiResponse(code = 500, message = "internal error")
+            }
+    )
     @GetMapping({RestAddress.FIND_ALL_BY_BASE_INFO_ID})
-    public ResponseEntity<ResultDTO<BaseInfoDetailDTO>> findAllByBaseInfoId(@PathVariable Long baseInfoId) {
+    public ResponseEntity<ResultDTO<BaseInfoDetailDTO>> findAllByBaseInfoId(@PathVariable
+                                                                            @ApiParam(value = "Base info Id", required = true
+                                                                            )
+                                                                            Long baseInfoId) {
         List<BaseInfoDetailDTO> all = baseInfoDetailService.findAllByBaseInfoId(baseInfoId);
         return new ResponseEntity(ResultDTO.<BaseInfoDetailDTO>builder().resultList(all).message("FIND ALL SUCCESSFULLY").build(), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Find all child of a base info detail"
+            , notes = "This api will return all of child of a base info detail, base info details are related to each other recurceivly")
+    @ApiResponses(
+            {
+                    @ApiResponse(code = 201, message = "successful"),
+                    @ApiResponse(code = 500, message = "internal error")
+            }
+    )
     @GetMapping(RestAddress.FIND_ALL_CHILD)
-    public ResponseEntity<ResultDTO<BaseInfoDetailDTO>> findAllChild(@PathVariable Long baseInfoEntityId) {
+    public ResponseEntity<ResultDTO<BaseInfoDetailDTO>> findAllChild(@PathVariable
+                                                                     @ApiParam(value = "Id of base info detail", required = true)
+                                                                     Long baseInfoEntityId) {
         List<BaseInfoDetailDTO> allChild = baseInfoDetailService.findAllChild(baseInfoEntityId);
         return new ResponseEntity(ResultDTO.<BaseInfoDetailDTO>builder().resultList(allChild).message("FIND ALL SUCCESSFULLY").build(), HttpStatus.OK);
     }
 
+    @ApiOperation(value = "Find base info detail by its code"
+            , notes = "This api will return a base info by its code")
+    @ApiResponses(
+            {
+                    @ApiResponse(code = 200, message = "successful"),
+                    @ApiResponse(code = 500, message = "internal error")
+            }
+    )
     @GetMapping(RestAddress.FIND_BY_CODE)
-    public ResponseEntity<ResultDTO<BaseInfoDetailDTO>> findByCode(@PathVariable String code) {
+    public ResponseEntity<ResultDTO<BaseInfoDetailDTO>> findByCode(@PathVariable
+                                                                   @ApiParam(value = "Code of base info detail", required = true)
+                                                                   String code) {
         BaseInfoDetailDTO res = baseInfoDetailService.findByCode(code);
         return new ResponseEntity(ResultDTO.<BaseInfoDetailDTO>builder().resultList(Collections.singletonList(res)).message("FIND ALL SUCCESSFULLY").build(), HttpStatus.OK);
     }

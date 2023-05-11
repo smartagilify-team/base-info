@@ -1,36 +1,26 @@
-package com.smartagilify.baseinfo.services;
+package com.smartagilify.baseinfo.unit.services;
 
 import com.smartagilify.baseinfo.dtos.BaseInfoDTO;
 import com.smartagilify.baseinfo.entities.BaseInfo;
 import com.smartagilify.baseinfo.repositories.BaseInfoRepository;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import com.smartagilify.baseinfo.services.BaseInfoServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.OngoingStubbing;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
 class BaseInfoServiceImplTest {
+    @InjectMocks
     BaseInfoServiceImpl underTest;
     @Mock
     BaseInfoRepository baseInfoRepository;
-
-    @BeforeEach
-    void setUp() {
-        underTest = new BaseInfoServiceImpl(baseInfoRepository, baseInfoRepository);
-    }
-
-    @AfterEach
-    void tearDown() {
-//        if (baseInfo != null) underTest.delete(baseInfo);
-    }
 
     @Test
     void ShouldFindByCode() {
