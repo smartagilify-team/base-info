@@ -1,6 +1,7 @@
-package com.smartagilify.baseinfo.repositories;
+package com.smartagilify.baseinfo.unit.repositories;
 
 import com.smartagilify.baseinfo.entities.BaseInfo;
+import com.smartagilify.baseinfo.repositories.BaseInfoRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,11 +19,6 @@ class BaseInfoRepositoryTest {
     @Autowired
     BaseInfoRepository underTest;
     BaseInfo baseInfo;
-
-    @AfterEach
-    void tearDown() {
-        if (baseInfo != null) underTest.delete(baseInfo);
-    }
 
     @Test
     void ShouldFindByCode() {
