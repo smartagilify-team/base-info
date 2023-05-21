@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
 
+@Slf4j
 @RestController
 @RequestMapping(RestAddress.BASE_INFO)
 public class BaseInfoController extends BaseController<BaseInfo, BaseInfoMapper, BaseInfoDTO> {
@@ -38,7 +40,9 @@ public class BaseInfoController extends BaseController<BaseInfo, BaseInfoMapper,
     public ResponseEntity<BaseInfoDTO> findByCode(@PathVariable
                                                   @ApiParam(value = "Code of baseinfo", required = true)
                                                   String code) {
+        log.debug("Request for fetching a base info by baseinfoCode: {}", code);
         BaseInfoDTO res = baseInfoService.findByCode(code);
+        log.debug("The has been fetched base info: ", res);
         return new ResponseEntity(ResultDTO.<BaseInfoDTO>builder().resultList(Collections.singletonList(res)).message("FIND ALL SUCCESSFULLY").build(), HttpStatus.OK);
     }
 
