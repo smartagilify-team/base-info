@@ -3,11 +3,12 @@ package com.smartagilify.baseinfo.services;
 import com.smartagilify.baseinfo.dtos.BaseInfoDetailDTO;
 import com.smartagilify.baseinfo.entities.BaseInfo;
 import com.smartagilify.baseinfo.entities.BaseInfoDetail;
+import com.smartagilify.baseinfo.exception.BaseInfoDetailNotFoundException;
+import com.smartagilify.baseinfo.exception.BaseInfoNotFoundException;
 import com.smartagilify.baseinfo.mappers.BaseInfoDetailMapper;
 import com.smartagilify.baseinfo.repositories.BaseInfoDetailRepository;
 import com.smartagilify.baseinfo.repositories.BaseInfoRepository;
 import com.smartagilify.core.enumerations.EN_STATE;
-import com.smartagilify.core.exceptions.BusinessException;
 import com.smartagilify.core.model.InputDTO;
 import com.smartagilify.core.services.BaseService;
 import org.mapstruct.factory.Mappers;
@@ -40,8 +41,9 @@ public class BaseInfoDetailServiceImpl extends BaseService<BaseInfoDetail, BaseI
 
         BaseInfoDetail entity = mapper.dto2Entity(dto.getData());
         Optional<BaseInfo> baseInfoEntity = baseInfoRepository.findById(entity.getBaseInfo().getId());
+
         if (!baseInfoEntity.isPresent()) {
-            throw new BusinessException("Can not find base info.");
+            throw new BaseInfoNotFoundException();
         }
         entity.setBaseInfo(baseInfoEntity.get());
 
@@ -50,7 +52,7 @@ public class BaseInfoDetailServiceImpl extends BaseService<BaseInfoDetail, BaseI
         else {
             Optional<BaseInfoDetail> parentBaseInfoDetailEntity = baseInfoDetailRepository.findById(entity.getParent().getId());
             if (!parentBaseInfoDetailEntity.isPresent()) {
-                throw new BusinessException("Can not parent base info detail.");
+                throw new BaseInfoDetailNotFoundException();
             }
             entity.setParent(parentBaseInfoDetailEntity.get());
         }
@@ -80,7 +82,7 @@ public class BaseInfoDetailServiceImpl extends BaseService<BaseInfoDetail, BaseI
     @Override
     public BaseInfoDetailDTO findByCode(String code) {
         Optional<BaseInfoDetail> baseInfoDetail = baseInfoDetailRepository.findByCode(code);
-        if (!baseInfoDetail.isPresent()) throw new BusinessException("cannot find base info with this code.");
+        if (!baseInfoDetail.isPresent()) throw new BaseInfoDetailNotFoundException();
         return mapper.entity2Dto(baseInfoDetail.get());
     }
 

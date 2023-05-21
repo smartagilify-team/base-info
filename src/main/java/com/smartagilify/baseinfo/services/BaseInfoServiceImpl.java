@@ -2,6 +2,7 @@ package com.smartagilify.baseinfo.services;
 
 import com.smartagilify.baseinfo.dtos.BaseInfoDTO;
 import com.smartagilify.baseinfo.entities.BaseInfo;
+import com.smartagilify.baseinfo.exception.BaseInfoNotFoundException;
 import com.smartagilify.baseinfo.mappers.BaseInfoMapper;
 import com.smartagilify.baseinfo.repositories.BaseInfoRepository;
 import com.smartagilify.core.exceptions.BusinessException;
@@ -30,7 +31,7 @@ public class BaseInfoServiceImpl extends BaseService<BaseInfo, BaseInfoMapper, B
     @Override
     public BaseInfoDTO findByCode(String code) {
         Optional<BaseInfo> baseInfo = baseInfoRepository.findByCode(code);
-        if (!baseInfo.isPresent()) throw new BusinessException("cannot find base info with this code.");
+        if (!baseInfo.isPresent()) throw new BaseInfoNotFoundException();
         return mapper.entity2Dto(baseInfo.get());
     }
 
